@@ -1,19 +1,18 @@
-package ec.com.nttdata.customerservice.domain.entity;
+package ec.com.nttdata.customerservice.domain.model;
 
-
-import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "customers")
+@EqualsAndHashCode(callSuper = true)
 public class Customer extends Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long customerId;
     private String password;
     private Boolean status;
+
 }

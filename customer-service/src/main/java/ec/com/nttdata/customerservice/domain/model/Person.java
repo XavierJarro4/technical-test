@@ -1,16 +1,18 @@
-package ec.com.nttdata.customerservice.domain.entity;
+package ec.com.nttdata.customerservice.domain.model;
 
-import jakarta.persistence.MappedSuperclass;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@MappedSuperclass
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class Person {
+
     protected String name;
     protected String gender;
     protected String identification;
     protected String address;
     protected String phone;
+
 }

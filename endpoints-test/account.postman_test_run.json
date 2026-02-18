@@ -1,0 +1,132 @@
+{
+	"id": "37a9a5e5-aba7-4db9-99f3-11234b3603f5",
+	"name": "account",
+	"timestamp": "2026-02-18T01:22:51.935Z",
+	"collection_id": "52479131-562ce61e-7115-4922-9325-54ff47de2f1b",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2026-02-18T01:22:51.108Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "64812183-9df9-4ee2-8e41-5f6a26bdcf75",
+			"name": "create account",
+			"url": "http://localhost:8081/api/v1/accounts",
+			"time": 35,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				35
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fbf3079c-e9da-40ec-bdf6-c78c3ea1d399",
+			"name": "get account",
+			"url": "http://localhost:8081/api/v1/accounts/6",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "02dfa33c-48db-48bf-b4a1-144a4a0bdde3",
+			"name": "get all accounts",
+			"url": "http://localhost:8081/api/v1/accounts",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "68f819e2-814f-4bee-bdef-04b3fb3d060e",
+			"name": "update account",
+			"url": "http://localhost:8081/api/v1/accounts/6",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "00842a0f-d1e0-456a-9e49-457bd554c333",
+			"name": "delete account",
+			"url": "http://localhost:8081/api/v1/accounts/6",
+			"time": 13,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 85,
+	"collection": {
+		"requests": [
+			{
+				"id": "64812183-9df9-4ee2-8e41-5f6a26bdcf75",
+				"method": "POST"
+			},
+			{
+				"id": "fbf3079c-e9da-40ec-bdf6-c78c3ea1d399",
+				"method": "GET"
+			},
+			{
+				"id": "02dfa33c-48db-48bf-b4a1-144a4a0bdde3",
+				"method": "GET"
+			},
+			{
+				"id": "68f819e2-814f-4bee-bdef-04b3fb3d060e",
+				"method": "PUT"
+			},
+			{
+				"id": "00842a0f-d1e0-456a-9e49-457bd554c333",
+				"method": "DELETE"
+			}
+		]
+	}
+}

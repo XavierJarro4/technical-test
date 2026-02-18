@@ -1,0 +1,407 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8081/api/v1
+  description: Generated server url
+tags:
+- name: Movement
+  description: Movement management API
+- name: Report
+  description: Report generation API
+- name: Account
+  description: Account management API
+paths:
+  /movements/{id}:
+    get:
+      tags:
+      - Movement
+      summary: Get movement by ID
+      operationId: getMovementById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Movement found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+        "404":
+          description: Movement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+    put:
+      tags:
+      - Movement
+      summary: Update movement by ID
+      operationId: updateMovement
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovementRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: Movement updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+        "404":
+          description: Movement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+    delete:
+      tags:
+      - Movement
+      summary: Delete movement by ID
+      operationId: deleteMovement
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Movement deleted successfully
+        "404":
+          description: Movement not found
+  /accounts/{id}:
+    get:
+      tags:
+      - Account
+      summary: Get account by ID
+      operationId: getAccountById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Account found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+    put:
+      tags:
+      - Account
+      summary: Update account by ID
+      operationId: updateAccount
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: Account updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+    delete:
+      tags:
+      - Account
+      summary: Delete account by ID
+      operationId: deleteAccount
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Account deleted successfully
+        "404":
+          description: Account not found
+  /movements:
+    get:
+      tags:
+      - Movement
+      summary: Get all movements
+      operationId: getAllMovements
+      responses:
+        "200":
+          description: Movements retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovementResponseDTO'
+    post:
+      tags:
+      - Movement
+      summary: Register a new movement
+      operationId: registerMovement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovementRequestDTO'
+        required: true
+      responses:
+        "201":
+          description: Movement registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+        "400":
+          description: Invalid input or insufficient balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovementResponseDTO'
+  /accounts:
+    get:
+      tags:
+      - Account
+      summary: Get all accounts
+      operationId: getAllAccounts
+      responses:
+        "200":
+          description: Accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountResponseDTO'
+    post:
+      tags:
+      - Account
+      summary: Create a new account
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRequestDTO'
+        required: true
+      responses:
+        "201":
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+        "404":
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponseDTO'
+  /reports/{customerId}:
+    get:
+      tags:
+      - Report
+      summary: Generate customer report with account movements
+      operationId: generateReport
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: Report generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerReportDTO'
+        "404":
+          description: Customer or accounts not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerReportDTO'
+components:
+  schemas:
+    MovementResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        date:
+          type: string
+          format: date-time
+        type:
+          type: string
+        value:
+          type: number
+          format: double
+        balance:
+          type: number
+          format: double
+    MovementRequestDTO:
+      required:
+      - accountId
+      - type
+      - value
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        type:
+          type: string
+        value:
+          type: number
+          format: double
+    AccountResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customerId:
+          type: integer
+          format: int64
+        number:
+          type: string
+        type:
+          type: string
+        balance:
+          type: number
+          format: double
+        status:
+          type: boolean
+    AccountRequestDTO:
+      required:
+      - customerId
+      - initialBalance
+      - number
+      - type
+      type: object
+      properties:
+        customerId:
+          type: integer
+          format: int64
+        number:
+          type: string
+        type:
+          type: string
+        initialBalance:
+          type: number
+          format: double
+        status:
+          type: boolean
+    AccountReportDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number:
+          type: string
+        type:
+          type: string
+        balance:
+          type: number
+          format: double
+        status:
+          type: boolean
+        movements:
+          type: array
+          items:
+            $ref: '#/components/schemas/MovementResponseDTO'
+    CustomerReportDTO:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          format: int64
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountReportDTO'

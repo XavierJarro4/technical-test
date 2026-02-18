@@ -42,9 +42,6 @@ public class MovementController implements MovementApi {
 
         log.info("REST request to get movement with ID: {}", id);
 
-        /*return movementUseCase.getMovementById(id)
-                .map(movementWebMapper::domainToResponse)
-                .map(ResponseEntity::ok);*/
         return movementUseCase.getMovementById(id)
                 .map(movementWebMapper::domainToResponse)
                 .map(ResponseEntity::ok)
@@ -70,11 +67,6 @@ public class MovementController implements MovementApi {
 
         log.info("REST request to update Movement with ID: {}", id);
 
-        /*return movementRequest
-                .map(movementWebMapper::requestToDomain)
-                .flatMap(movement -> movementUseCase.updateMovement(id, movement))
-                .map(movementWebMapper::domainToResponse)
-                .map(ResponseEntity::ok);*/
         return movementRequest
                 .map(movementWebMapper::requestToDomain)
                 .flatMap(movement -> movementUseCase.updateMovement(id, movement))
@@ -90,8 +82,6 @@ public class MovementController implements MovementApi {
 
         log.info("REST request to delete Movement with ID: {}", id);
 
-        /*return movementUseCase.deleteMovement(id)
-                .then(Mono.just(ResponseEntity.noContent().build()));*/
         return movementUseCase.deleteMovement(id)
                 .thenReturn(ResponseEntity.<Void>noContent().build());
 

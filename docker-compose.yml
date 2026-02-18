@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: bank-postgres
+    environment:
+      POSTGRES_DB: customer_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: MySecr3tPassWord@as2
+    ports:
+      - "5432:5432"
+    networks:
+      - bank-network
+
+  customer-service:
+    build: ./customer-service
+    container_name: customer-service
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: MySecr3tPassWord@as2
+    ports:
+      - "8080:8080"
+    networks:
+      - bank-network
+
+  account-service:
+    build: ./account-service
+    container_name: account-service
+    depends_on:
+      - postgres
+      - customer-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: MySecr3tPassWord@as2
+      CUSTOMER_SERVICE_URL: http://customer-service:8080
+    ports:
+      - "8081:8081"
+    networks:
+      - bank-network
+
+networks:
+  bank-network:
+    driver: bridge
